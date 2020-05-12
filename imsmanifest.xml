@@ -1,0 +1,50 @@
+<!--
+
+Single SCO content packaging example. SCORM 2004 3rd Edition.
+
+Provided by Rustici Software - http://www.scorm.com
+
+-->
+<!--
+ 
+The manifest node contains a unique identifer for this course and the course's version number.
+The schema declarations are important to ensure you are delivering valid XML. For the most part
+these should remain static. Other schema prefixes are allowed, but can limit interoperabilty.
+-->
+<manifest identifier="com.scorm.meucurso.contentpackaging.somenteumcurso.20043rd" version="1" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd">
+
+<!--
+The metadata node simply declares which SCORM version this course operates under.
+-->
+    <metadata>
+        <schema>ADL SCORM</schema>
+        <schemaversion>2004 3rd Edition</schemaversion>
+    </metadata>
+
+<!--
+ There is just one organization. The organization contains just one item.
+-->
+    <organizations default="curso_1">
+        <organization identifier="curso_1">
+            <title>Primeiro curso de html usando scorm</title>
+            <item identifier="cap1" identifierref="cap1_recursos">
+                <title>Capítulo 1 - Botão com alerta</title>
+            </item>
+        </organization>
+    </organizations>
+
+<!--
+ 
+  There is just one resource that represents the single SCO that comprises the entirety of this course.
+  The href attribute points to the launch URL for the course and all of the files required by the course
+  are listed.
+  
+-->
+    <resources>
+        <resource identifier="cap1_recursos" type="webcontent" adlcp:scormType="sco" href="content/index.html">
+            <file href="content/index.html"/>
+            <file href="content/style.css"/>
+            <file href="content/script.js"/>
+        </resource>
+    </resources>
+</manifest>
