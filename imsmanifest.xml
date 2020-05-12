@@ -30,6 +30,9 @@ The metadata node simply declares which SCORM version this course operates under
             <item identifier="cap1" identifierref="cap1_recursos">
                 <title>Capítulo 1 - Botão com alerta</title>
             </item>
+            <item identifier="cap2" identifierref="cap2_recursos">
+                <title>Capítulo 2 - É só uma página</title>
+            </item>
         </organization>
     </organizations>
 
@@ -43,8 +46,15 @@ The metadata node simply declares which SCORM version this course operates under
     <resources>
         <resource identifier="cap1_recursos" type="webcontent" adlcp:scormType="sco" href="content/index.html">
             <file href="content/index.html"/>
-            <file href="content/style.css"/>
             <file href="content/script.js"/>
+            <dependency identifierref="recursos_comuns"/>
+        </resource>
+        <resource identifier="cap2_recursos" type="webcontent" adlcp:scormType="sco" href="content/page1.html">
+            <file href="content/page1.html"/>
+            <dependency identifierref="recursos_comuns"/>
+        </resource>
+        <resource identifier="recursos_comuns" type="webcontent" adlcp:scormType="asset">
+            <file href="content/style.css"/>
         </resource>
     </resources>
 </manifest>
