@@ -54,7 +54,6 @@ The metadata node simply declares which SCORM version this course operates under
             <item identifier="cap1" identifierref="cap1_recursos">
                 <title>Capítulo 1 - Páginas</title>
                 
-                <adlcp:completionThreshold progressWeight="0.9"/>
                 <imsss:sequencing IDRef="common_seq_rules">
                     <imsss:objectives>
                         <!--
@@ -73,7 +72,7 @@ The metadata node simply declares which SCORM version this course operates under
            
             <item identifier="cap2" identifierref="cap2_recursos">
                 <title>Capítulo final - Parabéns</title>
-                <adlcp:completionThreshold progressWeight="0.1"/>
+
                 <imsss:sequencing IDRef="common_seq_rules">
                     <imsss:sequencingRules>
                         <imsss:preConditionRule>

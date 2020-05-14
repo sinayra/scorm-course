@@ -52,7 +52,7 @@ const scorm = {
       return;
     }
 
-    result = this.API.Initialize("");
+    result = this.API.Initialize();
 
     if (result == this.SCORM_FALSE) {
       this.displayError();
@@ -70,7 +70,7 @@ const scorm = {
       return;
     }
 
-    result = this.API.Terminate("");
+    result = this.API.Terminate();
 
     this.terminateCalled = true;
 
@@ -100,12 +100,8 @@ occur at these times in this example.
     result = this.API.GetValue(element);
 
     if (checkError == true && result == "") {
-      var errorNumber = this.API.GetLastError();
-
-      if (errorNumber != this.SCORM_NO_ERROR) {
-        this.displayError();
-        return "";
-      }
+      this.displayError();
+      return "";
     }
 
     return result;
