@@ -1,137 +1,81 @@
-<!--
+<?xml version="1.0" standalone="no" ?>
+<manifest identifier="RusticiSoftwareSCORMDriverTemplate" version="1.3"
+          xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+          xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
+          xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3"
+          xmlns:imsss="http://www.imsglobal.org/xsd/imsss"
+          xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd
+                              http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd
+                              http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd
+                              http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd">
+     <metadata>
+		<schema>ADL SCORM</schema>
+		<schemaversion>2004 4th Edition</schemaversion>
+		<adlcp:location>metadata.xml</adlcp:location>
+	</metadata>
+	<organizations default="B0">
+		<organization identifier="B0" adlseq:objectivesGlobalToSystem="false">
+			<!--****** Title ******-->
+			<title>Meu primeiro curso</title>
+			<item identifier="i1" identifierref="r1" isvisible="true">
+				<!--****** Title ******-->
 
-Sequencing example that demonstrates the new features of SCORM 2004 4th Edition.
+				<title>Meu primeiro curso</title>
 
-The new features of 4th Edition are described at http://www.scorm.com/blog/2009/01/scorm-2004-4th-edition/
+				<imsss:sequencing>
+					<imsss:objectives>
+					        <imsss:primaryObjective objectiveID="PRIMARYOBJ"/>
+					</imsss:objectives>
+                    <imsss:deliveryControls tracked="true" completionSetByContent="true" objectiveSetByContent="true"/>
+				</imsss:sequencing>
+			</item>
+			<metadata>
+				<adlcp:location>metadata.xml</adlcp:location>
+			</metadata>			
+			<imsss:sequencing>
+				<imsss:controlMode choice="true" flow="true"/>
+                <imsss:rollupRules>
+                    <imsss:rollupRule childActivitySet="all">
+                        <imsss:rollupConditions>
+                            <imsss:rollupCondition condition="satisfied"/>
+                        </imsss:rollupConditions>
+                        <imsss:rollupAction action="satisfied"/>
+                    </imsss:rollupRule>
+                    <imsss:rollupRule childActivitySet="all">
+                        <imsss:rollupConditions>
+                            <imsss:rollupCondition operator="not" condition="satisfied"/>
+                        </imsss:rollupConditions>
+                        <imsss:rollupAction action="notSatisfied"/>
+                    </imsss:rollupRule>
+                    <imsss:rollupRule childActivitySet="all">
+                        <imsss:rollupConditions>
+                            <imsss:rollupCondition condition="completed"/>
+                        </imsss:rollupConditions>
+                        <imsss:rollupAction action="completed"/>
+                    </imsss:rollupRule>
+                    <imsss:rollupRule childActivitySet="all">
+                        <imsss:rollupConditions>
+                            <imsss:rollupCondition operator="not" condition="completed"/>
+                        </imsss:rollupConditions>
+                        <imsss:rollupAction action="incomplete"/>
+                    </imsss:rollupRule>
+                </imsss:rollupRules>
+			</imsss:sequencing>
+		</organization>
+	</organizations>
+	<resources>
+		<resource identifier="r1" type="webcontent" adlcp:scormType="sco" href="scormdriver/indexAPI.html">
+			 <file href="scormdriver/indexAPI.html" />
+				<file href="index.html" />
+				<file href="page2.html" />
+				<file href="page3.html" />
+				<file href="final.html" />
+				<file href="script.js" />
+				<file href="style.css" />
 
-This example extends the functionality of the Post Test Rollup example.
-
-Provided by Rustici Software - http://www.scorm.com
-
-Sequencing Strategy:
-This example maintains the sequencing strategy from the Forced Sequential example.
-It requires the learner to visit the SCOs in order. Once a SCO has been visited, 
-the learner can jump backwards to review material, but the learner can not jump 
-ahead beyond the next SCO.
-
-To demonstrate the new 4th Edition "jump" navigation request, the learner can now
-skip straight to the test at anytime from within a SCO, bypassing all sequencing rules.
-If the learner is taking the content though, it still must be taked in order.
-
-To demonstrate the additional data that can be stored on global objectives, this example
-uses completion status as the driver for prerequisites. In prior editions of SCORM 2004, 
-only success status was available on global objectives. In this case, we simply need the
-learner to complete the SCO not necessarily satisfy it.
-
-Rollup Strategy:
-This example maintains the sequencing strategy from the Forced Sequential example.
-It still works even though the sequencing strategy now allows for jump request because
-it is entirely dependent on the post test.
-
-To demonstrate the new rollup of progress measure, this example not includes weights on each
-SCO that represent their overall contribution to completion.
-
-Other:
-To demonstrate the value of the new shared data buckets in 4th Edition, we added a notes feature
-that allows the learner to take brief notes and have them be available in any SCO.
--->
-<manifest identifier="com.scorm.formata.meucurso" version="1" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd">
-
-    <!--
-The metadata node simply declares which SCORM version this course operates under.
--->
-    <metadata>
-        <schema>ADL SCORM</schema>
-        <schemaversion>2004 4th Edition</schemaversion>
-    </metadata>
-
-    <!--
- There is just one organization. The organization contains just one item.
--->
-    <organizations default="curso_1">
-        <organization identifier="curso_1" adlseq:objectivesGlobalToSystem="false" adlcp:sharedDataGlobalToSystem="false">
-            <title>Primeiro curso de html usando scorm</title>
-            <item identifier="cap1" identifierref="cap1_recursos">
-                <title>Capítulo 1 - Páginas</title>
-                
-                <adlcp:completionThreshold progressWeight="0.9"/>
-                <imsss:sequencing IDRef="common_seq_rules">
-                    <imsss:objectives>
-                        <!--
-
-                                    Each SCO has a global objective to that can be read by other SCOs to see if it is completed.
-                                    This global will be satisfied when the activity is satisfied since it is associated with the
-                                    primary objective
-                                    
-                        -->
-                        <imsss:primaryObjective objectiveID="cap1_lido">
-                            <imsss:mapInfo targetObjectiveID="com.scorm.formata.meucurso.cap1_lido" readSatisfiedStatus="true" writeSatisfiedStatus="true"/>
-                        </imsss:primaryObjective>
-                    </imsss:objectives>
-                </imsss:sequencing>
-            </item>
-           
-            <item identifier="cap2" identifierref="cap2_recursos">
-                <title>Capítulo final - Parabéns</title>
-                <adlcp:completionThreshold progressWeight="0.1"/>
-                <imsss:sequencing IDRef="common_seq_rules">
-                    <imsss:sequencingRules>
-                        <imsss:preConditionRule>
-                            <imsss:ruleConditions conditionCombination="any">
-                                <imsss:ruleCondition referencedObjective="cap_anterior" operator="not" condition="satisfied"/>
-                                <imsss:ruleCondition referencedObjective="cap_anterior" operator="not" condition="objectiveStatusKnown"/>
-                            </imsss:ruleConditions>
-                            <imsss:ruleAction action="disabled"/>
-                        </imsss:preConditionRule>
-                    </imsss:sequencingRules>
-                    <imsss:objectives>
-                        <imsss:primaryObjective objectiveID="cap2_lido">
-                            <imsss:mapInfo targetObjectiveID="com.scorm.formata.meucurso.cap2_lido" readSatisfiedStatus="true" writeSatisfiedStatus="true"/>
-                        </imsss:primaryObjective>
-                        <imsss:objective objectiveID="cap_anterior">
-                            <imsss:mapInfo targetObjectiveID="com.scorm.formata.meucurso.cap1_lido" readSatisfiedStatus="true" writeSatisfiedStatus="false"/>
-                        </imsss:objective>
-                    </imsss:objectives>
-                </imsss:sequencing>
-            </item>
-            <imsss:sequencing>
-                <!--Both choice and flow navigation are allowed-->
-                <imsss:controlMode choice="true" flow="true"/>
-            </imsss:sequencing>
-        </organization>
-    </organizations>
-
-    <resources>
-        <resource identifier="cap1_recursos" type="webcontent" adlcp:scormType="sco" href="shared/index.html?content=page">
-            <file href="content/page1.html"/>
-            <file href="content/page2.html"/>
-            <file href="content/page3.html"/>
-            <file href="content/script.js"/>
-            <file href="content/style.css"/>
-            <dependency identifierref="recursos_comuns"/>
-        </resource>
-        <resource identifier="cap2_recursos" type="webcontent" adlcp:scormType="sco" href="shared/index.html?content=final">
-            <file href="content/final.html"/>
-            <file href="content/style.css"/>
-            <dependency identifierref="recursos_comuns"/>
-        </resource>
-        <resource identifier="recursos_comuns" type="webcontent" adlcp:scormType="asset">
-            <file href="shared/style.css"/>
-            <file href="shared/index.html"/>
-            <file href="shared/content.js"/>
-            <file href="shared/iframe.js"/>
-            <file href="shared/navigation.js"/>
-            <file href="shared/scorm.js"/>
-        </resource>
-    </resources>
-    <imsss:sequencingCollection>
-        <imsss:sequencing ID="common_seq_rules">
-            <!-- This course doesn't rollup a score -->
-            <imsss:rollupRules objectiveMeasureWeight="0"/>
-            <!--
-                Set these values to prevent content from accidently being auto-completed/satisfied
-            -->
-            <imsss:deliveryControls completionSetByContent="true" objectiveSetByContent="true"/>
-        </imsss:sequencing>
-    </imsss:sequencingCollection>
+		</resource>
+	</resources>
 </manifest>
