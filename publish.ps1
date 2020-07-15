@@ -1,3 +1,6 @@
+# Execute in a terminal the command bellow before running this script
+# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
 $copyPaths = @("content", "shared")
 $copyFiles = @("imsmanifest.xml")
 $folderName = (Get-Item -Path "./").name
